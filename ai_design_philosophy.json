@@ -1,0 +1,184 @@
+{
+  "ai_design_philosophy": {
+    "shared_conventions": {
+      "layout": {
+        "chat_column_max_width": "680–760px",
+        "composer": "fixed bottom-center, grows on multiline input",
+        "sidebar": "collapsible left panel, 240–280px, conversation history",
+        "message_style": "user = bubble/highlight, AI = full-width flat prose"
+      },
+      "interactions": {
+        "streaming": "token-by-token with cursor blink",
+        "copy_button": "appears on hover over code/response blocks",
+        "feedback": "thumbs up/down inline below response",
+        "suggested_replies": "pill chips below response",
+        "code_blocks": "distinct background, language label, copy button",
+        "attachments": "clip icon in composer row"
+      },
+      "typography_rules": [
+        "never full-bleed text — always max-width constrained",
+        "code always uses monospace in visually distinct blocks",
+        "generous line-height (1.5–1.7) for readability"
+      ]
+    },
+    "models": {
+      "claude": {
+        "made_by": "Anthropic",
+        "personality": "warm, humanist, honest — feels like a thoughtful collaborator",
+        "colors": {
+          "primary_accent": "#D97757",
+          "background": "#FAF0E8",
+          "dark_surface": "#2C2C2A",
+          "text_primary": "#1A1A18",
+          "text_muted": "#6B6B68"
+        },
+        "typography": {
+          "display": "Tiempos / Freight Text — humanist serif",
+          "body": "Anthropic Sans — clean, readable, never cold",
+          "code": "monospace, weight 400",
+          "line_height": "1.7",
+          "weight_scale": "400 regular, 500 medium only"
+        },
+        "shape": {
+          "border_radius_sm": "6px",
+          "border_radius_md": "8px",
+          "border_radius_lg": "12px",
+          "border_weight": "0.5px – 1px (very fine)",
+          "shadows": "none or 1px subtle ring",
+          "icons": "outlined, 1.5px stroke"
+        },
+        "principles": [
+          "warmth over sterility — cream and terracotta, not clinical white",
+          "prose-first layout — information breathes in paragraphs, not dashboards",
+          "honest restraint — no flashy animation, trust built through calm",
+          "generous whitespace — padding is large, density is avoided"
+        ],
+        "motion": "minimal — soft fades, cursor blink only"
+      },
+      "chatgpt": {
+        "made_by": "OpenAI",
+        "personality": "neutral, functional, professional — productivity and utility first",
+        "colors": {
+          "primary_accent": "#10A37F",
+          "dark_background": "#212121",
+          "sidebar": "#171717",
+          "text_primary": "#ECECEC",
+          "text_muted": "#8E8EA0",
+          "light_surface": "#F9F9F9"
+        },
+        "typography": {
+          "display": "Söhne — inter-adjacent grotesque",
+          "body": "clean, neutral, utilitarian — slightly tight line-height",
+          "code": "monospace in prominent, high-contrast blocks",
+          "markdown_usage": "heavy — headers, bullets, code blocks aggressively structured"
+        },
+        "shape": {
+          "border_radius_pill": "20px – full",
+          "border_radius_card": "12px – 16px",
+          "border": "1px solid rgba(255,255,255,0.1)",
+          "shadows": "subtle elevation, no hard drop shadows",
+          "icons": "solid fill, 24px standard"
+        },
+        "principles": [
+          "dark-first — deep charcoal is the default experience, not an option",
+          "function over form — UI chrome disappears, content is the product",
+          "markdown density — information structured aggressively for power users",
+          "rounded but serious — large radii on components, tone stays professional"
+        ],
+        "motion": "smooth and subtle — nothing distracts from the task"
+      },
+      "gemini": {
+        "made_by": "Google",
+        "personality": "Material You, multimodal, expressive — colorful and deeply branded",
+        "colors": {
+          "blue": "#4285F4",
+          "red": "#EA4335",
+          "yellow": "#FBBC04",
+          "green": "#34A853",
+          "light_surface": "#F8F9FA",
+          "dark_surface": "#1E1F20",
+          "text_primary": "#202124"
+        },
+        "typography": {
+          "display": "Google Sans / Product Sans — rounded, optically balanced",
+          "body": "Google Sans Text — accessible, Material rhythm",
+          "code": "Google Mono / Roboto Mono"
+        },
+        "shape": {
+          "border_radius_pill": "50px — very round",
+          "border_radius_card": "16px – 28px (Material 3 large)",
+          "elevation": "tonal color, not shadow",
+          "icons": "Material Symbols, rounded variant"
+        },
+        "principles": [
+          "Material You dynamics — tonal surfaces, dynamic color, M3 container hierarchy",
+          "multimodal-first icons — sparkle/star glyph identity, playful and rounded",
+          "brand color expressiveness — 4-color Google spectrum in gradients and states",
+          "fluid not rigid — morphing shapes, animated color washes, expressive motion"
+        ],
+        "motion": "spring curves, 300–500ms — most expressive of all AI interfaces"
+      },
+      "copilot": {
+        "made_by": "Microsoft",
+        "personality": "Fluent Design, enterprise-ready, productivity-embedded — familiarly Microsoft",
+        "colors": {
+          "microsoft_blue": "#0078D4",
+          "gradient_start": "#40B4F0",
+          "gradient_end": "#8764B8",
+          "office_surface": "#F3F2F1",
+          "text_primary": "#323130"
+        },
+        "typography": {
+          "display": "Segoe UI Variable Display",
+          "body": "Segoe UI — Windows-native, crisp, precise",
+          "code": "Cascadia Code — with programming ligatures"
+        },
+        "shape": {
+          "border_radius": "4px – 8px (WinUI, more angular)",
+          "brand_orb": "circular animated gradient avatar",
+          "shadows": "layered Fluent depth shadows",
+          "icons": "Fluent Icons — filled and outlined variants"
+        },
+        "principles": [
+          "Fluent acrylic and depth — translucency and Reveal highlights create material physicality",
+          "Office DNA — design is subordinate to host product (Word, Teams, Edge)",
+          "task-oriented flow — action panels, suggested prompts, quick tasks over open chat",
+          "animated gradient identity — blue-to-purple swirl is the brand signature"
+        ],
+        "motion": "Fluent easing curves, 200–300ms — precise and efficient"
+      }
+    },
+    "differentiators": {
+      "background_tone": {
+        "claude": "warm cream",
+        "chatgpt": "charcoal dark",
+        "gemini": "neutral gray",
+        "copilot": "office gray"
+      },
+      "accent_color": {
+        "claude": "terracotta",
+        "chatgpt": "sage green",
+        "gemini": "4-color spectrum",
+        "copilot": "azure to plum gradient"
+      },
+      "type_mood": {
+        "claude": "humanist serif",
+        "chatgpt": "neutral grotesque",
+        "gemini": "rounded sans",
+        "copilot": "variable display"
+      },
+      "corner_radius": {
+        "claude": "soft (8–12px)",
+        "chatgpt": "round (16–20px)",
+        "gemini": "very round (28px+)",
+        "copilot": "sharp (4–8px)"
+      },
+      "motion_style": {
+        "claude": "minimal fade",
+        "chatgpt": "smooth, subtle",
+        "gemini": "spring, expressive",
+        "copilot": "Fluent easing"
+      }
+    }
+  }
+}

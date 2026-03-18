@@ -2,19 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>YOUR CHATBOT NAME HERE</title>
+    <title>CodeBot - Your AI Coding Assistant (Hot Reload Active!)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="custom.css">
 </head>
 <body>
-  <h1>YOUR CHATBOT NAME HERE</h1>
-  <!-- STUDENT EDIT: Change the welcome message below -->
-  <p id="welcome">YOUR WELCOME MESSAGE HERE</p>
-  <div id="chat"></div>
-  <div class="input-container">
-    <!-- STUDENT EDIT: Change the placeholder text below -->
-    <input type="text" id="message" placeholder="YOUR PLACEHOLDER TEXT HERE" onkeypress="if(event.key==='Enter') sendMessage()">
-    <button id="sendBtn" onclick="sendMessage()">Send</button>
+  <div class="app-container">
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Conversations</h2>
+        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+      </div>
+      <div class="conversation-list" id="conversationList">
+        <!-- Conversation history will be populated here -->
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <div class="chat-container">
+        <header class="chat-header">
+          <h1>🤖 NINJA-BOT 4000</h1>
+          <p>Your friendly AI coding assistant!</p>
+        </header>
+        
+        <div id="chat" class="chat-messages"></div>
+        
+        <div class="composer" id="composer">
+          <div class="composer-input-container">
+            <textarea 
+              id="message" 
+              placeholder="Ask me about coding or technology..." 
+              rows="1"
+              autocomplete="off"></textarea>
+            <button class="attachment-btn" id="attachmentBtn">📎</button>
+            <button id="sendBtn" class="send-btn">Send</button>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 
   <!-- DO NOT EDIT: JavaScript for chat functionality -->

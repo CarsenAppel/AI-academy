@@ -1,31 +1,44 @@
-/* STUDENT EDITABLE: Change these colors to personalize your chatbot! */
+/* STUDENT EDITABLE: Customize these colors to make your chatbot unique! */
 
-/* YOUR PRIMARY COLOR HERE - This changes the send button and user message border */
 :root {
-  --primary-color: #2196F3;
+  /* Primary Color - Used for send button, focus states, and accents */
+  --primary-color: #6366f1;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-sidebar: #f8f9fa;
+  
+  /* Text Colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  
+  /* UI Colors */
+  --border-color: #e0e0e0;
+  --user-bg: #e0e7ff;
+  --code-bg: #f8f9fa;
 }
 
-/* YOUR BACKGROUND COLOR HERE - This changes the page background */
-:root {
-  --background-color: #f5f5f5;
+[data-theme="dark"] {
+  /* Dark theme overrides */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --bg-sidebar: #2a2a2a;
+  --text-primary: #e5e5e5;
+  --text-secondary: #a3a3a3;
+  --border-color: #404040;
+  --user-bg: #3b3b5c;
+  --code-bg: #2a2a2a;
 }
 
-/* YOUR BACKGROUND IMAGE HERE - Add url('your-image.jpg') for a background picture */
-:root {
-  --background-image: none;
+/* Hover effect for the send button */
+#sendBtn:hover {
+  background-color: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
-/* YOUR CHAT BACKGROUND COLOR HERE - This changes the chat area background */
-:root {
-  --chat-background: #ffffff;
-}
-
-/* YOUR USER MESSAGE BACKGROUND HERE - This changes how your messages look */
-:root {
-  --user-message-bg: #e3f2fd;
-}
-
-/* YOUR BOT MESSAGE BACKGROUND HERE - This changes how bot messages look */
-:root {
-  --bot-message-bg: #f1f8e9;
+/* Focus effect for input field */
+#message:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
