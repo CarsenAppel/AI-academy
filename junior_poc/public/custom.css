@@ -1,0 +1,31 @@
+/* STUDENT EDITABLE: Change these colors to personalize your chatbot! */
+
+/* YOUR PRIMARY COLOR HERE - This changes the send button and user message border */
+:root {
+  --primary-color: #2196F3;
+}
+
+/* YOUR BACKGROUND COLOR HERE - This changes the page background */
+:root {
+  --background-color: #f5f5f5;
+}
+
+/* YOUR BACKGROUND IMAGE HERE - Add url('your-image.jpg') for a background picture */
+:root {
+  --background-image: none;
+}
+
+/* YOUR CHAT BACKGROUND COLOR HERE - This changes the chat area background */
+:root {
+  --chat-background: #ffffff;
+}
+
+/* YOUR USER MESSAGE BACKGROUND HERE - This changes how your messages look */
+:root {
+  --user-message-bg: #e3f2fd;
+}
+
+/* YOUR BOT MESSAGE BACKGROUND HERE - This changes how bot messages look */
+:root {
+  --bot-message-bg: #f1f8e9;
+}

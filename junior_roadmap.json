@@ -1,0 +1,172 @@
+{
+  "project": {
+    "name": "My AI Chatbot",
+    "track": "Junior",
+    "target_grades": "3-5",
+    "coding_background": "Block-based (MakeCode / IMPACT)",
+    "philosophy": "Guided discovery — students fill in a pre-built template to feel the magic of talking to a real AI without getting lost in syntax.",
+    "estimated_sessions": 4,
+    "session_length_minutes": 45
+  },
+
+  "architecture": {
+    "overview": "Two-layer system: a teacher-controlled backend proxy (hidden) and a student-facing frontend (their canvas). Students never interact with the backend directly.",
+    "frontend": {
+      "language": "HTML + CSS only (no JS written by students)",
+      "hosting": "School-managed Glitch project — students access via shared URL",
+      "take_home": "Students bookmark the school Glitch URL — no local copy needed",
+      "student_can_modify": ["chatbot name", "color scheme", "welcome message", "background image or emoji decorations"]
+    },
+    "backend_proxy": {
+      "language": "Node.js + Express",
+      "hosting": "Glitch (free tier)",
+      "managed_by": "Teacher only",
+      "student_can_access": false,
+      "responsibilities": [
+        "Store and inject OpenRouter API key (never exposed to frontend)",
+        "Enforce immutable system prompt",
+        "Run content filter on all outgoing requests and incoming responses",
+        "Rate limit requests per session to prevent abuse"
+      ]
+    },
+    "ai_provider": {
+      "service": "OpenRouter",
+      "recommended_model": "mistralai/mistral-7b-instruct-v0.1",
+      "fallback_model": "meta-llama/llama-3.1-8b-instruct:free",
+      "cost": "Free tier"
+    }
+  },
+
+  "guardrails": {
+    "immutable": true,
+    "enforced_at": "backend (server-side only)",
+    "system_prompt": {
+      "locked": true,
+      "student_can_modify": false,
+      "example": "You are a friendly coding helper for elementary school students aged 8-11. Only answer questions about computers, coding, and technology. Keep all answers short, simple, and encouraging. Never discuss anything unrelated to computers or coding. If asked off-topic questions, gently redirect back to coding topics."
+    },
+    "content_filtering": {
+      "enabled": true,
+      "strategy": "keyword blocklist + OpenRouter moderation flag",
+      "block_on_trigger": true,
+      "replacement_message": "Hmm, I can only talk about coding and computers! Try asking me something about that."
+    },
+    "api_key": {
+      "location": "backend environment variable only",
+      "exposed_to_student": false
+    },
+    "topic_restriction": {
+      "allowed_topics": ["coding", "computers", "technology", "the internet", "how AI works"],
+      "enforced_via": "system prompt + keyword filter"
+    }
+  },
+
+  "curriculum": {
+    "sessions": [
+      {
+        "number": 1,
+        "title": "What is a Chatbot?",
+        "type": "unplugged + discussion",
+        "duration_minutes": 45,
+        "objectives": [
+          "Understand what AI is at a high level",
+          "Understand the flow: user types -> internet -> AI -> response",
+          "Connect chatbots to things students already know (Siri, Google)"
+        ],
+        "activities": [
+          "Draw the data flow on whiteboard as a class",
+          "Play 'robot telephone' — one student is the AI, others send written questions",
+          "Discuss: what CAN'T a chatbot do?"
+        ],
+        "no_computers_required": true
+      },
+      {
+        "number": 2,
+        "title": "Building the Face of Your Chatbot (HTML)",
+        "type": "guided coding",
+        "duration_minutes": 45,
+        "objectives": [
+          "Understand what HTML tags are (the box-and-label analogy)",
+          "Fill in the chatbot name and welcome message",
+          "Identify the parts of the pre-built interface"
+        ],
+        "student_tasks": [
+          "Fill in: chatbot name between <title> tags",
+          "Fill in: welcome message in the designated span",
+          "Observe: the message box, input field, and send button already exist"
+        ],
+        "teacher_notes": "Use the analogy: HTML is like LEGO instructions — the pieces are already made, you just decide what to label them."
+      },
+      {
+        "number": 3,
+        "title": "Making It Yours (CSS Colours & Style)",
+        "type": "guided coding + creative",
+        "duration_minutes": 45,
+        "objectives": [
+          "Understand that CSS controls how things look",
+          "Change colours using pre-defined CSS variables",
+          "See the immediate visual feedback of their changes"
+        ],
+        "student_tasks": [
+          "Change --primary-color variable to their favourite colour",
+          "Change --background-color",
+          "Optional: change font-size of the chat bubbles"
+        ],
+        "teacher_notes": "Pre-define CSS variables at the top of the stylesheet so students only change one value per property. No cascading confusion."
+      },
+      {
+        "number": 4,
+        "title": "Talk to Your Chatbot!",
+        "type": "demo + exploration",
+        "duration_minutes": 45,
+        "objectives": [
+          "Experience sending a message and receiving an AI response",
+          "Understand at a high level that their message travelled to a server",
+          "Reflect on what the AI can and cannot do"
+        ],
+        "activities": [
+          "Teacher enables live backend — students visit the shared URL",
+          "Each student types their first message",
+          "Class discussion: What surprised you? What did it get wrong?",
+          "Optional: students try to 'break' the chatbot (good learning moment)"
+        ],
+        "teacher_notes": "The guardrails demonstration is a great teaching moment — when the AI redirects off-topic questions, explain WHY that happens."
+      }
+    ],
+    "stretch_goals": [
+      "Add an emoji to the chatbot name",
+      "Write a longer, more creative welcome message",
+      "Try different colour combinations and screenshot your favourite",
+      "Draw on paper what you imagine the AI 'looks like' inside a computer"
+    ]
+  },
+
+  "learning_outcomes": [
+    "Can explain what an AI chatbot is in their own words",
+    "Understands that HTML controls structure and CSS controls appearance",
+    "Has successfully interacted with a real AI model",
+    "Understands that code can send and receive information over the internet",
+    "Knows that AI has rules and guardrails built in by people"
+  ],
+
+  "file_structure": {
+    "student_files": ["index.html", "custom.css"],
+    "teacher_files": ["server.js", ".env", "package.json", "base.css"],
+    "student_editable_sections": {
+      "index.html": ["YOUR CHATBOT NAME HERE", "YOUR WELCOME MESSAGE HERE", "YOUR PLACEHOLDER TEXT HERE"],
+      "custom.css": ["--primary-color", "--background-color", "--background-image", "--chat-background", "--user-message-bg", "--bot-message-bg"]
+    }
+  },
+
+  "tech_stack": {
+    "frontend_framework": "None (plain HTML/CSS)",
+    "backend_framework": "Express.js (Node)",
+    "hosting": "Glitch.com (free)",
+    "ai_api": "OpenRouter (free tier)",
+    "documentation_links": {
+      "glitch": "https://glitch.com/",
+      "openrouter": "https://openrouter.ai/docs",
+      "express": "https://expressjs.com/"
+    }
+  }
+}

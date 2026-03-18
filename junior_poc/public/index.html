@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YOUR CHATBOT NAME HERE</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+  <h1>YOUR CHATBOT NAME HERE</h1>
+  <!-- STUDENT EDIT: Change the welcome message below -->
+  <p id="welcome">YOUR WELCOME MESSAGE HERE</p>
+  <div id="chat"></div>
+  <div class="input-container">
+    <!-- STUDENT EDIT: Change the placeholder text below -->
+    <input type="text" id="message" placeholder="YOUR PLACEHOLDER TEXT HERE" onkeypress="if(event.key==='Enter') sendMessage()">
+    <button id="sendBtn" onclick="sendMessage()">Send</button>
+  </div>
+
+  <!-- DO NOT EDIT: JavaScript for chat functionality -->
+  <script src="chat.js"></script>
+</body>
+</html>
