@@ -2,15 +2,58 @@ const express = require('express');
 const axios = require('axios');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
+const crypto = require('crypto');
 
 const app = express();
 app.use(express.json());
 app.use(rateLimit({ windowMs: 60 * 1000, max: 10, message: 'Too many requests, please try again later.' }));
 app.use(express.static('public')); // Serve static files from public/
 
+// Teacher authentication setup
+const TEACHER_USERNAME = process.env.TEACHER_USERNAME || 'teacher';
+const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD || 'password123';
+const teacherSessions = {}; // Store active sessions: token -> { username, timestamp }
+
 const SYSTEM_PROMPT = "You are a friendly coding helper for elementary school students aged 6-14. Only answer questions about computers, coding, and technology. Keep all answers short, simple, and encouraging. Never discuss anything unrelated to computers or coding. If asked off-topic questions, gently redirect back to coding topics.";
 const BLOCKLIST = ['politics', 'violence', 'drugs', 'sex', 'religion', 'money', 'war', 'hate']; // Expanded keyword blocklist
 const REPLACEMENT_MESSAGE = "Hmm, I can only talk about coding and computers! Try asking me something about that.";
+
+// Teacher login endpoint
+app.post('/teacher-login', (req, res) => {
+  const { username, password } = req.body;
+  
+  if (username === TEACHER_USERNAME && password === TEACHER_PASSWORD) {
+    const token = crypto.randomBytes(32).toString('hex');
+    teacherSessions[token] = {
+      username,
+      timestamp: Date.now()
+    };
+    
+    res.json({ token, message: 'Login successful' });
+  } else {
+    res.status(401).json({ error: 'Invalid username or password' });
+  }
+});
+
+// Teacher token verification endpoint
+app.post('/teacher-verify', (req, res) => {
+  const { token } = req.body;
+  
+  if (teacherSessions[token]) {
+    // Token is valid
+    res.json({ valid: true });
+  } else {
+    res.status(401).json({ valid: false, error: 'Invalid token' });
+  }
+});
+
+// Teacher logout endpoint
+app.post('/teacher-logout', (req, res) => {
+  const { token } = req.body;
+  delete teacherSessions[token];
+  res.json({ message: 'Logged out' });
+});
+
 
 app.post('/chat', async (req, res) => {
   const userMessage = req.body.message;
