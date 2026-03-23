@@ -5,9 +5,30 @@
   <title>YOUR CHATBOT NAME HERE</title>
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="custom.css">
+  <style>
+    .teacher-login-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #6c757d;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 100;
+    }
+    .teacher-login-btn:hover {
+      background-color: #5a6268;
+    }
+  </style>
 </head>
 <body>
-  <h1>YOUR CHATBOT NAME HERE</h1>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>YOUR CHATBOT NAME HERE</h1>
+  </div>
   <!-- STUDENT EDIT: Change the welcome message below -->
   <p id="welcome">YOUR WELCOME MESSAGE HERE</p>
   <div id="chat"></div>
@@ -16,6 +37,8 @@
     <input type="text" id="message" placeholder="YOUR PLACEHOLDER TEXT HERE" onkeypress="if(event.key==='Enter') sendMessage()">
     <button id="sendBtn" onclick="sendMessage()">Send</button>
   </div>
+
+  <a href="teacher.html" class="teacher-login-btn">Teacher Login</a>
 
   <!-- DO NOT EDIT: JavaScript for chat functionality -->
   <script src="chat.js"></script>

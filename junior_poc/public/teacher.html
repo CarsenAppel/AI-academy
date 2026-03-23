@@ -74,12 +74,34 @@
     .logout-btn:hover {
       background-color: #c82333;
     }
+    .back-btn {
+      background-color: #6c757d;
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-block;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+    .back-btn:hover {
+      background-color: #5a6268;
+    }
   </style>
 </head>
 <body>
+  <a href="index.html" class="back-btn">← Back</a>
+  
   <div id="login-form">
     <div class="login-container">
-      <h1>Teacher Portal Login</h1>
+      <div style="margin-bottom: 20px;">
+        <h1>Teacher Portal Login</h1>
+      </div>
       <div id="error-message" class="error"></div>
       <form onsubmit="handleLogin(event)">
         <div class="form-group">
@@ -98,8 +120,8 @@
   </div>
 
   <div id="dashboard">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-      <h1>Teacher Dashboard</h1>
+    <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px;">
+      <h1 style="margin-right: auto;">Teacher Dashboard</h1>
       <button class="logout-btn" onclick="handleLogout()">Logout</button>
     </div>
     <div style="background-color: #f9f9f9; padding: 20px; border-radius: 10px;">

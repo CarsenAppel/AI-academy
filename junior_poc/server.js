@@ -6,12 +6,18 @@ const crypto = require('crypto');
 
 const app = express();
 app.use(express.json());
-app.use(rateLimit({ windowMs: 60 * 1000, max: 10, message: 'Too many requests, please try again later.' }));
+
+// Rate limit for student chat (stricter)
+const chatLimiter = rateLimit({ windowMs: 60 * 1000, max: 10, message: 'Too many requests, please try again later.' });
+
+// Rate limit for teacher endpoints (more lenient)
+const teacherLimiter = rateLimit({ windowMs: 60 * 1000, max: 50, message: 'Too many requests, please try again later.' });
+
 app.use(express.static('public')); // Serve static files from public/
 
 // Teacher authentication setup
-const TEACHER_USERNAME = process.env.TEACHER_USERNAME || 'teacher';
-const TEACHER_PASSWORD = process.env.TEACHER_PASSWORD || 'password123';
+const TEACHER_USERNAME = 'teacher';
+const TEACHER_PASSWORD = 'teacher123';
 const teacherSessions = {}; // Store active sessions: token -> { username, timestamp }
 
 const SYSTEM_PROMPT = "You are a friendly coding helper for elementary school students aged 6-14. Only answer questions about computers, coding, and technology. Keep all answers short, simple, and encouraging. Never discuss anything unrelated to computers or coding. If asked off-topic questions, gently redirect back to coding topics.";
@@ -19,7 +25,7 @@ const BLOCKLIST = ['politics', 'violence', 'drugs', 'sex', 'religion', 'money', 
 const REPLACEMENT_MESSAGE = "Hmm, I can only talk about coding and computers! Try asking me something about that.";
 
 // Teacher login endpoint
-app.post('/teacher-login', (req, res) => {
+app.post('/teacher-login', teacherLimiter, (req, res) => {
   const { username, password } = req.body;
   
   if (username === TEACHER_USERNAME && password === TEACHER_PASSWORD) {
@@ -36,7 +42,7 @@ app.post('/teacher-login', (req, res) => {
 });
 
 // Teacher token verification endpoint
-app.post('/teacher-verify', (req, res) => {
+app.post('/teacher-verify', teacherLimiter, (req, res) => {
   const { token } = req.body;
   
   if (teacherSessions[token]) {
@@ -48,14 +54,14 @@ app.post('/teacher-verify', (req, res) => {
 });
 
 // Teacher logout endpoint
-app.post('/teacher-logout', (req, res) => {
+app.post('/teacher-logout', teacherLimiter, (req, res) => {
   const { token } = req.body;
   delete teacherSessions[token];
   res.json({ message: 'Logged out' });
 });
 
 
-app.post('/chat', async (req, res) => {
+app.post('/chat', chatLimiter, async (req, res) => {
   const userMessage = req.body.message;
   if (!userMessage) return res.status(400).json({ error: 'Message required' });
 
